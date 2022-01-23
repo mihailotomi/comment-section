@@ -1,33 +1,30 @@
 import React from "react";
 import VoteButton from "./comment/VoteButton";
 import ReplyButton from "./comment/ReplyButton";
+import { connect } from "react-redux";
 
-const Comment = () => {
-  const commentText = `Lorem ipsum dolor sit amet consectetur,
-    adipisicing elit. Eaque amet error magnam nihil velit voluptate exercitationem earum eius placeat?
-    Aut eveniet optio commodi a neque corporis vitae, rem similique aliquam?`;
-
-  const username = "mike";
+const Comment = ({ comment, isReply }) => {
   const isYou = "";
-  const timeUploaded = "2 months ago";
 
   return (
-    <div className="comment">
+    /*if the comment is a reply, give it a reply css class to style it as a reply*/
+    <div className={`comment ${isReply ? "reply" : ""}`}>
       <div className="info">
         <img
-          src={require("../images/avatars/image-amyrobson.png")}
+          src={window.location.origin + comment.user.image.png}
           className="user-image"
           alt=""
         />
-        <span className="username">{username}</span>
+        <span className="username">{comment.user.username}</span>
         <span className="is-you">{isYou}</span>
-        <span className="time-uploaded">{timeUploaded}</span>
+        <span className="time-uploaded">{comment.createdAt}</span>
       </div>
-      <div className="content">{commentText}</div>
-      <VoteButton />
+      <div className="content">{comment.content}</div>
+      {/*pass the comment on so that it can be used in action creators*/}
+      <VoteButton comment={comment} />
       <ReplyButton />
     </div>
   );
 };
 
-export default Comment;
+export default connect(null)(Comment);

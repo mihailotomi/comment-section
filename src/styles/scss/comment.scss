@@ -9,6 +9,18 @@
   grid-template-rows: 2.8vw auto;
   grid-gap: 1.5vw;
   align-items: center;
+  margin-bottom: 18px;
+
+  &.reply {
+    margin-left: 5.9vw;
+
+    @include responsive(tablet) {
+      margin-left: 5vw;
+    }
+    @include responsive(mobile) {
+      margin-left: 4.7vw;
+    }
+  }
 
   @include responsive(tablet) {
     padding: 3vw;
