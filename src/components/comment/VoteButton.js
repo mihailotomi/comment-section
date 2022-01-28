@@ -1,29 +1,29 @@
 import React from "react";
-import minusImg from "./icon-minus.svg";
-import plusImg from "./icon-plus.svg";
 import { connect } from "react-redux";
+import { useRef } from "react";
 import { upVote, downVote } from "../../actions";
+//components for svg icons, so we can dinamically change their style
+import PlusIcon from "./PlusIcon";
+import MinusIcon from "./MinusIcon";
 
 const VoteButton = ({ upVote, downVote, comment }) => {
+  //since action creators have a problem with conditional rendering of score,
+  //we made a reference to the score and we can change it only to one more or less
+  const vote = useRef(comment.score);
+
   return (
     /*we use the comment object that we passed as a prop to call action creators
      we put into the props via mapStateToProps*/
     <div className="vote-button">
-      <img
-        src={plusImg}
-        alt=""
-        className="vote-img plus"
-        onClick={() => {
-          upVote(comment);
+      <PlusIcon
+        onIconClick={() => {
+          upVote(comment, vote.current + 1);
         }}
       />
       <span className="vote-count">{comment.score}</span>
-      <img
-        src={minusImg}
-        alt=""
-        className="vote-img minus"
-        onClick={() => {
-          downVote(comment);
+      <MinusIcon
+        onIconClick={() => {
+          downVote(comment, vote.current - 1);
         }}
       />
     </div>

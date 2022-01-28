@@ -3,8 +3,8 @@ import Comment from "./components/Comment";
 import "./styles/css/style.css";
 import { connect } from "react-redux";
 
-//the comments are a part of redux state
-const App = ({ comments }) => {
+//the comments and the current user are a part of redux state
+const App = ({ comments, currentUser }) => {
   //since replies are stored as arguments of comments(check reducers/index.js), we need to make a new array
   //that is consisted of comments and replies
   const commentsAndReplies = [];
@@ -21,7 +21,13 @@ const App = ({ comments }) => {
     if (comment.replies) {
       //if there are replies add them onto the array
       comment.replies.forEach((reply) => {
-        commentsAndReplies.push({ ...reply, isReply: true });
+        const newReply = {
+          ...reply,
+          content:
+            `<span class='reply-to'>@${comment.user.username} </span>` +
+            reply.content,
+        };
+        commentsAndReplies.push({ ...newReply, isReply: true });
       });
     }
   });
@@ -31,9 +37,12 @@ const App = ({ comments }) => {
     return (
       <Comment
         isReply={comment.isReply}
-        //pass on the refrence to the comment object that was used this instance
+        //pass on the refrence to the comment object that was used to create this instance
         comment={comment}
         key={comment.id}
+        isCurrentUser={
+          currentUser.username === comment.user.username ? true : false
+        }
       />
     );
   });
@@ -42,7 +51,7 @@ const App = ({ comments }) => {
 };
 
 const mapStateToProps = (state) => {
-  return { comments: state.comments };
+  return { comments: state.comments, currentUser: state.currentUser };
 };
 
 export default connect(mapStateToProps)(App);

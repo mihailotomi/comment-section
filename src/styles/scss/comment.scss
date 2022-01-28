@@ -5,14 +5,14 @@
   background-color: $white;
   border-radius: 8px;
   display: grid;
-  grid-template-columns: 0.7fr 9.3fr 70px;
+  grid-template-columns: 42px minmax(120px, 12fr) minmax(70px, 5fr);
   grid-template-rows: 2.8vw auto;
   grid-gap: 1.5vw;
   align-items: center;
   margin-bottom: 18px;
 
   &.reply {
-    margin-left: 5.9vw;
+    margin-left: 3.4vw;
 
     @include responsive(tablet) {
       margin-left: 5vw;
@@ -24,13 +24,13 @@
 
   @include responsive(tablet) {
     padding: 3vw;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 0.5fr 1.5fr;
     grid-template-rows: 9vw auto 9.5vw;
     grid-gap: 2vw;
   }
   @include responsive(mobile) {
     padding: 3.7vw;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 0.5fr 1.5fr;
     grid-template-rows: 10vw auto 10.5vw;
     grid-gap: 2.5vw;
   }
@@ -82,6 +82,12 @@
   .vote-img {
     cursor: pointer;
     width: 11px;
+    color: $lightGrayishBlue;
+    &:hover,
+    &:active,
+    &:focus {
+      color: $moderateBlue;
+    }
     &.minus {
       height: 3px;
     }
@@ -97,7 +103,31 @@
   }
 }
 
-.reply-button {
+.edit-button {
+  cursor: pointer;
+  color: $moderateBlue;
+  margin-left: 15px;
+  background-color: $white;
+  &:hover,
+  &:focus,
+  &::after {
+    opacity: 0.5;
+  }
+}
+.delete-button {
+  color: $softRed;
+  background-color: $white;
+  cursor: pointer;
+  &:hover,
+  &:focus,
+  &::after {
+    opacity: 0.5;
+  }
+}
+
+.reply-button,
+.edit-and-delete {
+  justify-self: end;
   cursor: pointer;
   background-color: $white;
   color: $moderateBlue;
@@ -113,6 +143,32 @@
   @include responsive(mobile) {
     grid-column: 3/4;
     grid-row: 3/4;
+  }
+}
+
+.reply-button {
+  &:hover,
+  &:focus,
+  &::after {
+    opacity: 0.5;
+  }
+}
+
+.reply-to {
+  color: $moderateBlue;
+  background-color: $white;
+  font-weight: bold;
+}
+
+.reply-line {
+  width: 0.4rem;
+  background-color: $lightGray;
+  margin-left: 3vw;
+  @include responsive(tablet) {
+    margin-left: 0;
+  }
+  @include responsive(mobile) {
+    margin-left: 0;
   }
 }
 
@@ -134,11 +190,17 @@
 
   * {
     background-color: $white;
-    margin-right: 15px;
+    margin-right: 12px;
   }
 
   .is-you {
     margin: 0;
+    color: $white;
+    background-color: $moderateBlue;
+    font-weight: bold;
+    border-radius: 2px;
+    margin-right: 12px;
+    padding: 2px 6px;
   }
 
   .user-image {

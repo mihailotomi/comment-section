@@ -3,7 +3,7 @@
   background-color: white;
   border-radius: 8px;
   display: grid;
-  grid-template-columns: 0.7fr 9.3fr 70px;
+  grid-template-columns: 42px minmax(120px, 12fr) minmax(70px, 5fr);
   grid-template-rows: 2.8vw auto;
   grid-gap: 1.5vw;
   align-items: center;
@@ -11,10 +11,10 @@
 }
 
 .comment.reply {
-  margin-left: 5.9vw;
+  margin-left: 3.4vw;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
   .comment.reply {
     margin-left: 5vw;
   }
@@ -26,10 +26,10 @@
   }
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
   .comment {
     padding: 3vw;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 0.5fr 1.5fr;
     grid-template-rows: 9vw auto 9.5vw;
     grid-gap: 2vw;
   }
@@ -38,7 +38,7 @@
 @media only screen and (max-width: 480px) {
   .comment {
     padding: 3.7vw;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 0.5fr 1.5fr;
     grid-template-rows: 10vw auto 10.5vw;
     grid-gap: 2.5vw;
   }
@@ -51,7 +51,7 @@
   background-color: white;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
   .content {
     grid-column: 1/4;
     grid-row: 2/3;
@@ -78,7 +78,7 @@
   border-radius: 12px;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
   .vote-button {
     flex-direction: row;
     grid-column: 1/2;
@@ -101,6 +101,11 @@
 .vote-button .vote-img {
   cursor: pointer;
   width: 11px;
+  color: #c3c4ef;
+}
+
+.vote-button .vote-img:hover, .vote-button .vote-img:active, .vote-button .vote-img:focus {
+  color: #5457b6;
 }
 
 .vote-button .vote-img.minus {
@@ -117,7 +122,30 @@
   font-weight: 700;
 }
 
-.reply-button {
+.edit-button {
+  cursor: pointer;
+  color: #5457b6;
+  margin-left: 15px;
+  background-color: white;
+}
+
+.edit-button:hover, .edit-button:focus, .edit-button::after {
+  opacity: 0.5;
+}
+
+.delete-button {
+  color: #ed6468;
+  background-color: white;
+  cursor: pointer;
+}
+
+.delete-button:hover, .delete-button:focus, .delete-button::after {
+  opacity: 0.5;
+}
+
+.reply-button,
+.edit-and-delete {
+  justify-self: end;
   cursor: pointer;
   background-color: white;
   color: #5457b6;
@@ -127,17 +155,47 @@
   grid-row: 1/2;
 }
 
-@media only screen and (max-width: 700px) {
-  .reply-button {
+@media only screen and (max-width: 800px) {
+  .reply-button,
+  .edit-and-delete {
     grid-column: 3/4;
     grid-row: 3/4;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .reply-button {
+  .reply-button,
+  .edit-and-delete {
     grid-column: 3/4;
     grid-row: 3/4;
+  }
+}
+
+.reply-button:hover, .reply-button:focus, .reply-button::after {
+  opacity: 0.5;
+}
+
+.reply-to {
+  color: #5457b6;
+  background-color: white;
+  font-weight: bold;
+}
+
+.reply-line {
+  width: 0.4rem;
+  background-color: #eaecf1;
+  margin-left: 3vw;
+}
+
+@media only screen and (max-width: 800px) {
+  .reply-line {
+    margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .reply-line {
+    margin-left: 0;
   }
 }
 
@@ -149,7 +207,7 @@
   align-items: center;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
   .info {
     grid-column: 1/4;
     grid-row: 1/2;
@@ -165,11 +223,17 @@
 
 .info * {
   background-color: white;
-  margin-right: 15px;
+  margin-right: 12px;
 }
 
 .info .is-you {
   margin: 0;
+  color: white;
+  background-color: #5457b6;
+  font-weight: bold;
+  border-radius: 2px;
+  margin-right: 12px;
+  padding: 2px 6px;
 }
 
 .info .user-image {
