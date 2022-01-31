@@ -1,5 +1,6 @@
 import React from "react";
 import Comment from "./components/Comment";
+import PostComment from "./components/PostComment";
 import "./styles/css/style.css";
 import { connect } from "react-redux";
 
@@ -47,7 +48,12 @@ const App = ({ comments, currentUser }) => {
     );
   });
 
-  return <div className="container">{renderedComments}</div>;
+  return (
+    <div className="container">
+      {renderedComments}
+      <PostComment />
+    </div>
+  );
 };
 
 const mapStateToProps = (state) => {

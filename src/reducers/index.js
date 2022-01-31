@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import commentsReducer from "./commentsReducer";
 import userReducer from "./userReducer";
+import formReducer from "./formReducer";
 
 export const INITIAL_USER = {
   image: {
@@ -77,4 +78,5 @@ export const INITIAL_COMMENTS = [
 export default combineReducers({
   comments: commentsReducer,
   currentUser: userReducer,
+  formValue: formReducer,
 });

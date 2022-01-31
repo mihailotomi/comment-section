@@ -14,7 +14,21 @@ export const downVote = (comment, score) => {
 
 export const changeUser = (user) => {
   return {
-    action: "CHANGE_USER",
+    type: "CHANGE_USER",
     payload: user,
+  };
+};
+
+export const setFormValue = (value) => {
+  return {
+    type: "SET_FORM_VALUE",
+    payload: value,
+  };
+};
+
+export const createComment = (comment) => {
+  return {
+    type: "CREATE_COMMENT",
+    payload: comment,
   };
 };
