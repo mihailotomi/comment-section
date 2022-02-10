@@ -1,4 +1,5 @@
 .comment {
+  width: 100%;
   padding: 1.6vw;
   background-color: white;
   border-radius: 8px;
@@ -182,7 +183,7 @@
 }
 
 .reply-line {
-  width: 0.4rem;
+  width: 0.2rem;
   background-color: #eaecf1;
   margin-left: 3vw;
 }
@@ -197,6 +198,23 @@
   .reply-line {
     margin-left: 0;
   }
+}
+
+.update-button {
+  grid-row: 3/4;
+  grid-column: 3/4;
+  height: 48px;
+  color: white;
+  background-color: #5457b6;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  width: 100px;
+  justify-self: end;
+}
+
+.update-button:hover, .update-button:active, .update-button:focus {
+  opacity: 0.75;
 }
 
 .info {
@@ -247,5 +265,23 @@
 
 .info .time-uploaded {
   color: #67727e;
+}
+
+@media only screen and (max-width: 900px) {
+  .edit-mode {
+    grid-template-rows: 9vw auto 9.5vw 50px;
+  }
+  .edit-mode .update-button {
+    grid-row: 4/5;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .edit-mode {
+    grid-template-rows: 10vw auto 10.5vw 50px;
+  }
+  .edit-mode .update-button {
+    grid-row: 4/5;
+  }
 }
 /*# sourceMappingURL=comment.css.map */

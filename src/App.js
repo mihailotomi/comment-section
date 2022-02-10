@@ -22,13 +22,7 @@ const App = ({ comments, currentUser }) => {
     if (comment.replies) {
       //if there are replies add them onto the array
       comment.replies.forEach((reply) => {
-        const newReply = {
-          ...reply,
-          content:
-            `<span class='reply-to'>@${comment.user.username} </span>` +
-            reply.content,
-        };
-        commentsAndReplies.push({ ...newReply, isReply: true });
+        commentsAndReplies.push({ ...reply, isReply: true });
       });
     }
   });
@@ -37,10 +31,10 @@ const App = ({ comments, currentUser }) => {
   const renderedComments = commentsAndReplies.map((comment) => {
     return (
       <Comment
+        key={comment.id}
         isReply={comment.isReply}
         //pass on the refrence to the comment object that was used to create this instance
         comment={comment}
-        key={comment.id}
         isCurrentUser={
           currentUser.username === comment.user.username ? true : false
         }

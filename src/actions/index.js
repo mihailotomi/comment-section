@@ -32,3 +32,10 @@ export const createComment = (comment) => {
     payload: comment,
   };
 };
+
+export const updateComment = (comment, content) => {
+  return {
+    type: "UPDATE_COMMENT",
+    payload: { id: comment.id, content },
+  };
+};

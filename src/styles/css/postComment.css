@@ -81,5 +81,6 @@
 
 .send:hover, .send:focus, .send:active {
   outline: none;
+  opacity: 0.75;
 }
 /*# sourceMappingURL=postComment.css.map */

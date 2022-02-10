@@ -1,6 +1,7 @@
 @import "mixins";
 
 .comment {
+  width: 100%;
   padding: 1.6vw;
   background-color: $white;
   border-radius: 8px;
@@ -161,7 +162,7 @@
 }
 
 .reply-line {
-  width: 0.4rem;
+  width: 0.2rem;
   background-color: $lightGray;
   margin-left: 3vw;
   @include responsive(tablet) {
@@ -169,6 +170,24 @@
   }
   @include responsive(mobile) {
     margin-left: 0;
+  }
+}
+
+.update-button {
+  grid-row: 3/4;
+  grid-column: 3/4;
+  height: 48px;
+  color: $white;
+  background-color: $moderateBlue;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  width: 100px;
+  justify-self: end;
+  &:hover,
+  &:active,
+  &:focus {
+    opacity: 0.75;
   }
 }
 
@@ -214,5 +233,20 @@
 
   .time-uploaded {
     color: $grayishBlue;
+  }
+}
+
+.edit-mode {
+  @include responsive(tablet) {
+    grid-template-rows: 9vw auto 9.5vw 50px;
+    .update-button {
+      grid-row: 4/5;
+    }
+  }
+  @include responsive(mobile) {
+    grid-template-rows: 10vw auto 10.5vw 50px;
+    .update-button {
+      grid-row: 4/5;
+    }
   }
 }
