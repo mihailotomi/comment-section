@@ -32,14 +32,13 @@ const Comment = ({ comment, isReply, isCurrentUser, updateComment }) => {
     };
   }, []);
 
-  const isYou = isCurrentUser;
-
+  //give comment a YOU tag if the comment is by the current user
   const renderCurrentUser = (isCurrent) => {
     return isCurrent ? <span className="is-you">you</span> : "";
   };
 
   //comment has a reply button or edit and delete buttons
-  const renderReplyOrEdit = (isCurrent) => {
+  const renderReplyOrEditButton = (isCurrent) => {
     return isCurrent ? (
       <div
         style={{
@@ -48,7 +47,7 @@ const Comment = ({ comment, isReply, isCurrentUser, updateComment }) => {
         }}
         className="edit-and-delete"
       >
-        <DeleteButton />{" "}
+        <DeleteButton />
         <EditButton editMode={editMode} setEditMode={setEditMode} />
       </div>
     ) : (
@@ -56,8 +55,9 @@ const Comment = ({ comment, isReply, isCurrentUser, updateComment }) => {
     );
   };
 
-  //if comment is open in edit mode use textarea as the content
+  //it is an object for conditionally asigning atributes to the component
   let commentContent = {};
+  //if comment is open in edit mode use textarea as the content
   if (editMode) {
     commentContent.children = [
       <textarea
@@ -94,15 +94,15 @@ const Comment = ({ comment, isReply, isCurrentUser, updateComment }) => {
   };
 
   return (
+    //the outer div contains the comment and the thread line if the comment is a reply
     <div style={{ display: "flex" }}>
       {/*if the comment is a reply, give it a reply css class to style it as a reply
       if it is in edit mode add edit-mode class*/}
       <div className={isReply ? "reply-line" : ""}></div>
       <div
         ref={commentRef}
-        className={`comment ${isReply ? "reply" : ""} ${
-          editMode ? "edit-mode" : ""
-        }`}
+        // prettier-ignore
+        className={`comment ${isReply ? "reply" : ""} ${editMode ? "edit-mode" : ""}`}
       >
         <div className="info">
           <img
@@ -111,13 +111,13 @@ const Comment = ({ comment, isReply, isCurrentUser, updateComment }) => {
             alt=""
           />
           <span className="username">{comment.user.username}</span>
-          {renderCurrentUser(isYou)}
+          {renderCurrentUser(isCurrentUser)}
           <span className="time-uploaded">{comment.createdAt}</span>
         </div>
         <div className="content" {...commentContent}></div>
         {/*pass the comment on so that it can be used in action creators*/}
-        <VoteButton comment={comment} />
-        {renderReplyOrEdit(isYou)}
+        <VoteButton comment={comment} isCurrentUser={isCurrentUser} />
+        {renderReplyOrEditButton(isCurrentUser)}
         {editMode ? renderUpdateButton() : ""}
       </div>
     </div>
