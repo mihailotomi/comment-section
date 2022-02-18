@@ -39,3 +39,10 @@ export const updateComment = (comment, content) => {
     payload: { id: comment.id, content },
   };
 };
+
+export const deleteComment = (comment) => {
+  return {
+    type: "DELETE_COMMENT",
+    payload: comment,
+  };
+};

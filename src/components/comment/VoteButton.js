@@ -2,13 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { useRef } from "react";
 import { upVote, downVote } from "../../actions";
-//r components for svg icons, so we can dinamically change their style
+//components for svg icons, so we can dinamically change their style
 import PlusIcon from "./PlusIcon";
 import MinusIcon from "./MinusIcon";
 
 const VoteButton = ({ upVote, downVote, comment, isCurrentUser }) => {
-  //r since action creators have a problem with conditional rendering of score,
-  //r we made a reference to the score and we can change it only to one more or less
+  //since action creators have a problem with conditional rendering of score,
+  //we made a reference to the score and we can change it only to one more or less
   const vote = useRef(comment.score);
 
   return (
@@ -17,6 +17,7 @@ const VoteButton = ({ upVote, downVote, comment, isCurrentUser }) => {
     <div className="vote-button">
       <PlusIcon
         onIconClick={() => {
+          //he shouldnt be able to vote on his own comment
           upVote(comment, isCurrentUser ? vote.current : vote.current + 1);
         }}
       />
@@ -30,5 +31,5 @@ const VoteButton = ({ upVote, downVote, comment, isCurrentUser }) => {
   );
 };
 
-//r we don't need to use the state here, just action creators
+//we don't need to use the state here, just action creators
 export default connect(null, { upVote, downVote })(VoteButton);

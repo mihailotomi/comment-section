@@ -57,6 +57,15 @@ const commentsReducer = (state = INITIAL_COMMENTS, action) => {
         }
         return comment;
       });
+    case "DELETE_COMMENT":
+      return state.filter((comment) => {
+        if (comment.replies) {
+          comment.replies.filter((reply) => {
+            return reply.id !== action.payload.id;
+          });
+        }
+        return comment.id !== action.payload.id;
+      });
     default:
       return state;
   }

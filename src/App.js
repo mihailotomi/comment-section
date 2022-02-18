@@ -42,10 +42,31 @@ const App = ({ comments, currentUser }) => {
     );
   });
 
+  const renderOverlay = () => {
+    return (
+      <div className="dark-overlay">
+        <div className="overlay-pop-up">
+          <h3 className="pop-up-title">DELETE COMMENT</h3>
+          <p className="pop-up-question">
+            Are you sure you want to delete this comment? This will remove the
+            comment and can't be undone.
+          </p>
+          <div className="pop-up-answers">
+            <button className="no">NO, CANCEL</button>
+            <button className="yes">YES, DELETE</button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <div className="container">
-      {renderedComments}
-      <PostComment />
+    <div>
+      {/*renderOverlay()*/}
+      <div className="container">
+        {renderedComments}
+        <PostComment />
+      </div>
     </div>
   );
 };

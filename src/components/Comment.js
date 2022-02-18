@@ -47,7 +47,7 @@ const Comment = ({ comment, isReply, isCurrentUser, updateComment }) => {
         }}
         className="edit-and-delete"
       >
-        <DeleteButton />
+        <DeleteButton comment={comment} />
         <EditButton editMode={editMode} setEditMode={setEditMode} />
       </div>
     ) : (
@@ -101,7 +101,7 @@ const Comment = ({ comment, isReply, isCurrentUser, updateComment }) => {
       <div className={isReply ? "reply-line" : ""}></div>
       <div
         ref={commentRef}
-        // prettier-ignore
+        //prettier-ignore
         className={`comment ${isReply ? "reply" : ""} ${editMode ? "edit-mode" : ""}`}
       >
         <div className="info">
