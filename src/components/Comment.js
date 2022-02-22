@@ -4,11 +4,19 @@ import VoteButton from "./comment/VoteButton";
 import ReplyButton from "./comment/ReplyButton";
 import EditButton from "./comment/EditButton";
 import DeleteButton from "./comment/DeleteButton";
+
+//&action creators
 import { updateComment } from "../actions";
 
 import { connect } from "react-redux";
 
-const Comment = ({ comment, isReply, isCurrentUser, updateComment }) => {
+const Comment = ({
+  comment,
+  isReply,
+  isCurrentUser,
+  updateComment,
+  repliesTo,
+}) => {
   const [editMode, setEditMode] = useState(false);
   const textareaRef = useRef();
   const commentRef = useRef();
@@ -16,12 +24,12 @@ const Comment = ({ comment, isReply, isCurrentUser, updateComment }) => {
   //set edit mode to false if the click was registered outside of comment
   useEffect(() => {
     const onBodyClick = (event) => {
-      //check if the element that is referenced via useRef contains the clicked element
-      //it can be accessed with the current property
+      ////check if the element that is referenced via useRef contains the clicked element
+      ////it can be accessed with the current property
       if (commentRef.current && commentRef.current.contains(event.target)) {
         return;
       }
-      //if it does not contain it, close the dropdown
+      ////if it does not contain it, close the dropdown
       setEditMode(false);
     };
 
@@ -57,7 +65,7 @@ const Comment = ({ comment, isReply, isCurrentUser, updateComment }) => {
 
   //it is an object for conditionally asigning atributes to the component
   let commentContent = {};
-  //if comment is open in edit mode use textarea as the content
+  ////if comment is open in edit mode use textarea as the content
   if (editMode) {
     commentContent.children = [
       <textarea
@@ -69,11 +77,11 @@ const Comment = ({ comment, isReply, isCurrentUser, updateComment }) => {
       ></textarea>,
     ];
   } else {
-    //if it is not in edit mode content has a span to represents the
-    //user it is replying to
+    ////if it is not in edit mode content has a span to represents the
+    ////user it is replying to
     commentContent.dangerouslySetInnerHTML = {
       __html: isReply
-        ? `<span class='reply-to'>@${comment.user.username} </span>` +
+        ? `<span class='reply-to'>@${comment.replyingTo} </span>` +
           comment.content
         : comment.content,
     };

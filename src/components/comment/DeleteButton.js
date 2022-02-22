@@ -1,15 +1,15 @@
 import React from "react";
 import DeleteImg from "./icons/icon-delete.svg";
-import { deleteComment } from "../../actions";
+import { overlayMode } from "../../actions";
 
 import { connect } from "react-redux";
 
-const DeleteButton = ({ comment, deleteComment }) => {
+const DeleteButton = ({ comment, overlayMode }) => {
   return (
     <div
       className="delete-button"
       onClick={() => {
-        deleteComment(comment);
+        overlayMode(comment, true);
       }}
     >
       <img src={DeleteImg} alt="" className="delete-sign" /> Delete
@@ -17,4 +17,4 @@ const DeleteButton = ({ comment, deleteComment }) => {
   );
 };
 
-export default connect(null, { deleteComment })(DeleteButton);
+export default connect(null, { overlayMode })(DeleteButton);

@@ -2,14 +2,14 @@ import { INITIAL_COMMENTS } from "./index";
 
 const commentsReducer = (state = INITIAL_COMMENTS, action) => {
   //we need to find the last element in comments array,
-  //or the last comments' replies subaray so we could asign new comment with the id
+  //or the last element in comments' replies subaray, in order to keep track of last asigned id
   let lastElement = state[state.length - 1];
   if (lastElement.replies) {
     lastElement = lastElement.replies[lastElement.replies.length - 1];
   }
 
   switch (action.type) {
-    //actios' payload passes the id of the comment and the new score
+    //actions' payload passes the id of the comment and the new score
     case "UPVOTE":
       return state.map((comment) => {
         if (comment.id === action.payload.id) {
@@ -24,6 +24,7 @@ const commentsReducer = (state = INITIAL_COMMENTS, action) => {
         }
         return comment;
       });
+
     case "DOWNVOTE":
       return state.map((comment) => {
         if (comment.id === action.payload.id) {
@@ -57,15 +58,17 @@ const commentsReducer = (state = INITIAL_COMMENTS, action) => {
         }
         return comment;
       });
+
     case "DELETE_COMMENT":
       return state.filter((comment) => {
         if (comment.replies) {
-          comment.replies.filter((reply) => {
+          comment.replies = comment.replies.filter((reply) => {
             return reply.id !== action.payload.id;
           });
         }
         return comment.id !== action.payload.id;
       });
+
     default:
       return state;
   }

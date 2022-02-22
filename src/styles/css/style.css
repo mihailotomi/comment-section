@@ -472,6 +472,10 @@
   font-weight: bold;
 }
 
+.overlay-pop-up .pop-up-answers > *:hover, .overlay-pop-up .pop-up-answers > *:focus, .overlay-pop-up .pop-up-answers > *:active {
+  opacity: 0.75;
+}
+
 @media only screen and (max-width: 900px) {
   .overlay-pop-up .pop-up-answers > * {
     width: 28vw;

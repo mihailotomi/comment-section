@@ -46,3 +46,11 @@ export const deleteComment = (comment) => {
     payload: comment,
   };
 };
+
+//it needs to pass the comment that creates the overlay
+export const overlayMode = (comment, isTrue) => {
+  return {
+    type: "OVERLAY_MODE",
+    payload: { comment, isTrue },
+  };
+};

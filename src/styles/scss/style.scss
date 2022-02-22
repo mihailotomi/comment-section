@@ -91,6 +91,12 @@
       border-radius: 8px;
       color: white;
       font-weight: bold;
+      &:hover,
+      &:focus,
+      &:active {
+        opacity: 0.75;
+      }
+
       @include responsive(tablet) {
         width: 28vw;
       }
