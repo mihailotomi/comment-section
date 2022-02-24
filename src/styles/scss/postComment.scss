@@ -1,17 +1,30 @@
 @import "mixins";
 
 .post-comment {
+  width: 100%;
   display: grid;
   padding: 1.6vw;
   background-color: $white;
   border-radius: 8px;
   grid-template-columns: 40px auto 100px;
   grid-gap: 16px;
+  margin-bottom: 18px;
   @include responsive(mobile) {
     grid-template-rows: auto 12.5vw;
   }
   @include responsive(tablet) {
     grid-template-rows: auto 10vw;
+  }
+
+  &.reply {
+    margin-left: 3.4vw;
+
+    @include responsive(tablet) {
+      margin-left: 5vw;
+    }
+    @include responsive(mobile) {
+      margin-left: 4.7vw;
+    }
   }
 }
 

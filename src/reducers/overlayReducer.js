@@ -1,7 +1,7 @@
 import { INITIAL_COMMENTS } from "./index";
 
 //it stores the comment that created the overlay
-//so it could call the deleteComment action
+//so the overlay component it creates could call deleteComment reducer
 const overlayReducer = (
   state = { comment: INITIAL_COMMENTS[0], isTrue: false },
   action

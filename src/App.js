@@ -16,6 +16,7 @@ const App = ({
   overlay,
   deleteComment,
   overlayMode,
+  replyMode,
 }) => {
   //// since replies are stored as arguments of comments(check reducers/index.js), we need to make a new array
   //// that is consisted of comments and replies
@@ -44,15 +45,21 @@ const App = ({
   //turn an array of comments(and replies) into an aray of jsx components
   const renderedComments = commentsAndReplies.map((comment) => {
     return (
-      <Comment
-        key={comment.id}
-        isReply={comment.isReply}
-        ////pass on the refrence to the comment object that was used to create this instance
-        comment={comment}
-        isCurrentUser={
-          currentUser.username === comment.user.username ? true : false
+      <div key={comment.id}>
+        <Comment
+          isReply={comment.isReply}
+          ////pass on the refrence to the comment object that was used to create this instance
+          comment={comment}
+          isCurrentUser={
+            currentUser.username === comment.user.username ? true : false
+          }
+        />
+
+        {
+          //prettier-ignore
+          replyMode.isTrue && replyMode.comment.id === comment.id ? (<PostComment isReply={comment.isReply} label={'REPLY'} comment={comment}/>) : ("")
         }
-      />
+      </div>
     );
   });
 
@@ -92,7 +99,7 @@ const App = ({
       {overlay.isTrue ? renderOverlay() : ""}
       <div className="container">
         {renderedComments}
-        <PostComment />
+        <PostComment isReply={false} label={"SEND"} />
       </div>
     </div>
   );
@@ -103,6 +110,7 @@ const mapStateToProps = (state) => {
     comments: state.comments,
     currentUser: state.currentUser,
     overlay: state.overlay,
+    replyMode: state.replyMode,
   };
 };
 

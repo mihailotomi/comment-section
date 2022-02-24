@@ -59,7 +59,7 @@ const Comment = ({
         <EditButton editMode={editMode} setEditMode={setEditMode} />
       </div>
     ) : (
-      <ReplyButton />
+      <ReplyButton comment={comment} />
     );
   };
 

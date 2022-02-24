@@ -3,10 +3,19 @@ import { INITIAL_COMMENTS } from "./index";
 const commentsReducer = (state = INITIAL_COMMENTS, action) => {
   //we need to find the last element in comments array,
   //or the last element in comments' replies subaray, in order to keep track of last asigned id
-  let lastElement = state[state.length - 1];
-  if (lastElement.replies) {
-    lastElement = lastElement.replies[lastElement.replies.length - 1];
-  }
+  let lastId = 0;
+  state.forEach((comment) => {
+    if (comment.id > lastId) {
+      lastId = comment.id;
+    }
+    if (comment.replies) {
+      comment.replies.forEach((reply) => {
+        if (reply.id > lastId) {
+          lastId = reply.id;
+        }
+      });
+    }
+  });
 
   switch (action.type) {
     //actions' payload passes the id of the comment and the new score
@@ -42,7 +51,7 @@ const commentsReducer = (state = INITIAL_COMMENTS, action) => {
 
     case "CREATE_COMMENT":
       //action.payload passes the entire comment object exept the id
-      return [...state, { ...action.payload, id: lastElement.id + 1 }];
+      return [...state, { ...action.payload, id: lastId + 1 }];
     case "UPDATE_COMMENT":
       return state.map((comment) => {
         if (comment.id === action.payload.id) {
@@ -51,7 +60,6 @@ const commentsReducer = (state = INITIAL_COMMENTS, action) => {
         if (comment.replies) {
           comment.replies.forEach((reply) => {
             if (reply.id === action.payload.id) {
-              console.log(reply.id);
               reply.content = action.payload.content;
             }
           });
@@ -67,6 +75,41 @@ const commentsReducer = (state = INITIAL_COMMENTS, action) => {
           });
         }
         return comment.id !== action.payload.id;
+      });
+
+    case "CREATE_REPLY":
+      return state.map((comment) => {
+        if (comment.id === action.payload.comment.id) {
+          comment.replies = [
+            ...comment.replies,
+            {
+              id: lastId + 1,
+              content: action.payload.content,
+              createdAt: "now",
+              replyingTo: action.payload.comment.user.username,
+              user: action.payload.currentUser,
+              score: 0,
+            },
+          ];
+        }
+        if (comment.replies) {
+          comment.replies.forEach((reply) => {
+            if (reply.id === action.payload.comment.id) {
+              comment.replies = [
+                ...comment.replies,
+                {
+                  id: lastId + 1,
+                  content: action.payload.content,
+                  createdAt: "now",
+                  replyingTo: reply.user.username,
+                  user: action.payload.currentUser,
+                  score: 0,
+                },
+              ];
+            }
+          });
+        }
+        return comment;
       });
 
     default:

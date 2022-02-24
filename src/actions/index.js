@@ -47,10 +47,24 @@ export const deleteComment = (comment) => {
   };
 };
 
+export const createReply = (comment, content, currentUser) => {
+  return {
+    type: "CREATE_REPLY",
+    payload: { comment, content, currentUser },
+  };
+};
+
 //it needs to pass the comment that creates the overlay
 export const overlayMode = (comment, isTrue) => {
   return {
     type: "OVERLAY_MODE",
+    payload: { comment, isTrue },
+  };
+};
+
+export const createReplyMode = (comment, isTrue) => {
+  return {
+    type: "REPLY_MODE",
     payload: { comment, isTrue },
   };
 };

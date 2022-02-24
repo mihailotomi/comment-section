@@ -3,6 +3,7 @@ import commentsReducer from "./commentsReducer";
 import userReducer from "./userReducer";
 import formReducer from "./formReducer";
 import overlayReducer from "./overlayReducer";
+import replyModeReducer from "./replyModeReducer";
 
 export const INITIAL_USER = {
   image: {
@@ -81,4 +82,5 @@ export default combineReducers({
   currentUser: userReducer,
   formValue: formReducer,
   overlay: overlayReducer,
+  replyMode: replyModeReducer,
 });

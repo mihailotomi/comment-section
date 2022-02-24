@@ -286,12 +286,14 @@
 }
 
 .post-comment {
+  width: 100%;
   display: grid;
   padding: 1.6vw;
   background-color: white;
   border-radius: 8px;
   grid-template-columns: 40px auto 100px;
   grid-gap: 16px;
+  margin-bottom: 18px;
 }
 
 @media only screen and (max-width: 480px) {
@@ -303,6 +305,22 @@
 @media only screen and (max-width: 900px) {
   .post-comment {
     grid-template-rows: auto 10vw;
+  }
+}
+
+.post-comment.reply {
+  margin-left: 3.4vw;
+}
+
+@media only screen and (max-width: 900px) {
+  .post-comment.reply {
+    margin-left: 5vw;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .post-comment.reply {
+    margin-left: 4.7vw;
   }
 }
 
