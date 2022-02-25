@@ -17,11 +17,13 @@ const Comment = ({
   updateComment,
   repliesTo,
 }) => {
+  //$ The state and refs that are local to the comment
+  //$ Is it open for editing, and the refs for the comment itself and the input in edit mode
   const [editMode, setEditMode] = useState(false);
   const textareaRef = useRef();
   const commentRef = useRef();
 
-  //set edit mode to false if the click was registered outside of comment
+  //$set edit mode to false if the click was registered outside of comment
   useEffect(() => {
     const onBodyClick = (event) => {
       ////check if the element that is referenced via useRef contains the clicked element
@@ -35,17 +37,18 @@ const Comment = ({
 
     document.body.addEventListener("click", onBodyClick);
 
+    ////cleanup function
     return () => {
       document.body.removeEventListener("click", onBodyClick);
     };
   }, []);
 
-  //give comment a YOU tag if the comment is by the current user
+  //$fuction to give comment a YOU tag if the comment is by the current user
   const renderCurrentUser = (isCurrent) => {
     return isCurrent ? <span className="is-you">you</span> : "";
   };
 
-  //comment has a reply button or edit and delete buttons
+  //$ comment has a reply button or edit and delete buttons, depending on the current user
   const renderReplyOrEditButton = (isCurrent) => {
     return isCurrent ? (
       <div
@@ -63,7 +66,8 @@ const Comment = ({
     );
   };
 
-  //it is an object for conditionally asigning atributes to the component
+  //$it is an object for conditionally asigning atributes to the component,
+  //$ depending on the edit mode
   let commentContent = {};
   ////if comment is open in edit mode use textarea as the content
   if (editMode) {
@@ -87,6 +91,7 @@ const Comment = ({
     };
   }
 
+  //$ UPDATE button is only present in edit mode
   const renderUpdateButton = () => {
     return (
       <button
@@ -102,10 +107,12 @@ const Comment = ({
   };
 
   return (
-    //the outer div contains the comment and the thread line if the comment is a reply
+    ////the outer div contains the comment and the thread line if the comment is a reply
     <div style={{ display: "flex" }}>
-      {/*if the comment is a reply, give it a reply css class to style it as a reply
-      if it is in edit mode add edit-mode class*/}
+      {
+        ////if the comment is a reply, give it a reply css class to style it as a reply
+        ////if it is in edit mode add edit-mode class
+      }
       <div className={isReply ? "reply-line" : ""}></div>
       <div
         ref={commentRef}
@@ -123,7 +130,9 @@ const Comment = ({
           <span className="time-uploaded">{comment.createdAt}</span>
         </div>
         <div className="content" {...commentContent}></div>
-        {/*pass the comment on so that it can be used in action creators*/}
+        {
+          ////pass the comment on so that it can be used in action creators
+        }
         <VoteButton comment={comment} isCurrentUser={isCurrentUser} />
         {renderReplyOrEditButton(isCurrentUser)}
         {editMode ? renderUpdateButton() : ""}
