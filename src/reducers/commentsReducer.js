@@ -1,11 +1,11 @@
 import { INITIAL_COMMENTS } from "./index";
 
-let commentsArray = JSON.parse(localStorage.getItem("comments"));
-if (commentsArray === null) {
-  commentsArray = INITIAL_COMMENTS;
-}
+// let commentsArray = JSON.parse(localStorage.getItem("comments"));
+// if (commentsArray === null || commentsArray === undefined) {
+//   commentsArray = INITIAL_COMMENTS;
+// }
 
-const commentsReducer = (state = commentsArray, action) => {
+const commentsReducer = (state = INITIAL_COMMENTS, action) => {
   ////we need to find the last element in comments array,
   ////or the last element in comments' replies subaray, in order to keep track of last asigned id
   let lastId = 0;
